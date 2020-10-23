@@ -24,14 +24,17 @@ export default function App() {
     const requestUrl = 'https://fetch-hiring.s3.amazonaws.com/hiring.json'
 		fetch(enableCrossOriginRequests+requestUrl)
 			.then((response) => response.json())
-			.then((data) => {
-				console.log(data);
+			.then((data: IItems[]) => {
+				const filteredItems = data.filter((item: IItems) => item.name != null && item.name.length != 0)
+				filteredItems.sort((a: IItems, b: IItems) => a.name.localeCompare(b.name, navigator.languages[0] || navigator.language, {numeric: true, ignorePunctuation: true}))
+				console.log(filteredItems)
+				setItems(filteredItems)
 				setLoadComplete(true);
 			})
 	}, []);
 	return (
 	<div className="App">
-
+		<button onClick={() => console.log(items)} > hihihi </button>
 	</div>
 	);
 }

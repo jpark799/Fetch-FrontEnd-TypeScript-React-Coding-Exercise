@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { Grid, makeStyles, Paper, Card, Typography } from "@material-ui/core/";
 import "./App.css";
 
+const useStyles = makeStyles((theme) => ({
+	root: {
+		flexGrow: 1,
+		overflow: "hidden",
+	},
+	paper: {
+		width: 200,
+		padding: "5%",
+	},
+}));
+
 export default function App() {
+	const classes = useStyles();
 	interface IItems {
 		id: number;
 		listId: number;
@@ -46,24 +59,31 @@ export default function App() {
 	// filter on the map with the ids
 
 	return (
-		<div className="App">
+		<div className={classes.root}>
 			{loadComplete ? (
-				<>
+				<Grid  className={classes.root} container justify="center" spacing={10}>
 					{listIds.map((listId: any) => (
-						<div>
-							{listId}
-							{items.map(
-								(data: IItems) =>
-									data.listId === listId && (
-										<div>
-											hi {data.listId} {data.id}
-											{data.name}
-										</div>
-									)
-							)}
-						</div>
+						<Grid key={listId} item>
+							<Paper  className={classes.paper}>
+								<Typography align="center" > List Id: {listId} </Typography>
+								{items.map(
+									(data: IItems) =>
+										data.listId === listId && (
+											<div key={data.id} style={{padding:"5%"}}>
+												<Card style={{padding:"5%"}}>
+													{" "}
+													Name: {data.name} 
+													<br/>
+													Id: {data.id}
+												</Card>
+											</div>
+										)
+								)}
+								<br />
+							</Paper>
+						</Grid>
 					))}
-				</>
+				</Grid>
 			) : (
 				<div> Loading... </div>
 			)}

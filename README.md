@@ -13,3 +13,7 @@ Display this list of items to the user based on the following requirements:
 * Filter out any items where "name" is blank or null.
 
 The final result should be displayed to the user in an easy-to-read list.
+
+### Link
+
+You can find a codesandbox [here](https://codesandbox.io/s/fetch-front-end-coding-exercise-ydg74?file=/src/App.tsx).

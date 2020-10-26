@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid, CircularProgress, makeStyles, Paper, Card, Typography } from "@material-ui/core/";
 import { Header } from "./components";
-import "./App.css";
 
 const useStyles = makeStyles(() => ({
 	root: {

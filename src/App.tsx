@@ -93,8 +93,6 @@ export default function App() {
 										data.listId === listId && (
 											<div key={data.id} className={classes.padding}>
 												<Card className={classes.padding}>
-													Id: {data.id}
-													<br />
 													Name: {data.name}
 												</Card>
 											</div>

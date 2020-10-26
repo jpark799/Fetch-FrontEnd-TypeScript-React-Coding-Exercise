@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Grid, makeStyles, Paper, Card, Typography } from "@material-ui/core/";
+import { Header } from "./components";
 import "./App.css";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
-		overflow: "hidden",
+		width: "100%",
 	},
-	paper: {
+	paperColumn: {
 		width: 200,
 		padding: "5%",
+	},
+	padding: {
+		padding: "5%",
+	},
+	container: {
+		width: "100%",
+		margin: 0,
 	},
 }));
 
@@ -40,6 +48,7 @@ export default function App() {
 			.then((response) => response.json())
 			.then((data: IItems[]) => {
 				const filteredItems = data.filter((item: IItems) => item.name !== null && item.name.length !== 0);
+
 				filteredItems.sort((a: IItems, b: IItems) =>
 					a.name.localeCompare(b.name, navigator.languages[0] || navigator.language, {
 						numeric: true,
@@ -55,31 +64,33 @@ export default function App() {
 			});
 	}, []);
 
-	// make an array of ids
-	// filter on the map with the ids
-
 	return (
 		<div className={classes.root}>
+			<Header />
 			{loadComplete ? (
-				<Grid  className={classes.root} container justify="center" spacing={10}>
+				<Grid className={classes.container} container justify="center" spacing={10}>
 					{listIds.map((listId: any) => (
 						<Grid key={listId} item>
-							<Paper  className={classes.paper}>
-								<Typography align="center" > List Id: {listId} </Typography>
+							<Paper className={classes.paperColumn}>
+								<Typography className={classes.padding} align="center" variant={"h5"}>
+									<strong> List Id: {listId} </strong>
+								</Typography>
+								<Typography  align="center">
+									<strong> Total Count: {items.filter((item) => item.listId === listId).length} </strong>
+								</Typography>
 								{items.map(
 									(data: IItems) =>
 										data.listId === listId && (
-											<div key={data.id} style={{padding:"5%"}}>
-												<Card style={{padding:"5%"}}>
-													{" "}
-													Name: {data.name} 
-													<br/>
+											<div key={data.id} className={classes.padding}>
+												<Card className={classes.padding}>
 													Id: {data.id}
+													<br />
+													Name: {data.name}
 												</Card>
 											</div>
 										)
 								)}
-								<br />
+								
 							</Paper>
 						</Grid>
 					))}
@@ -87,10 +98,6 @@ export default function App() {
 			) : (
 				<div> Loading... </div>
 			)}
-
-			{/* {items.map((data: IItems) => (
-				<div>hi {data.id} {data.listId} {data.name}</div>
-			))} */}
 		</div>
 	);
 }

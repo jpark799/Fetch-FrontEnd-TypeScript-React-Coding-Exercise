@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Grid, makeStyles, Paper, Card, Typography } from "@material-ui/core/";
+import { Grid, CircularProgress, makeStyles, Paper, Card, Typography } from "@material-ui/core/";
 import { Header } from "./components";
 import "./App.css";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 	root: {
 		flexGrow: 1,
 		width: "100%",
@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
 		width: "100%",
 		margin: 0,
 	},
+	loading: {
+		padding: "30%",
+		textAlign: "center"
+	}
 }));
 
 export default function App() {
@@ -102,7 +106,7 @@ export default function App() {
 					))}
 				</Grid>
 			) : (
-				<div> Loading... </div>
+				<div className={classes.loading}> <CircularProgress/> </div>
 			)}
 		</div>
 	);

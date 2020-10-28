@@ -65,7 +65,7 @@ export default function App() {
 				);
 
 				// Created an array of all the unique ListIds to populate my columns
-				const availableListIds = filteredItems.map((item) => item.listId);
+				const availableListIds = filteredItems.map((item : IItems) => item.listId);
 				const uniqueListIds = [...new Set(availableListIds.sort())];
 
 				setListIds(uniqueListIds);
@@ -79,21 +79,21 @@ export default function App() {
 			<Header />
 			{loadComplete ? (
 				<Grid className={classes.container} container justify="center" spacing={10}>
-					{listIds.map((listId: any) => (
+					{listIds.map((listId: number) => (
 						<Grid key={listId} item>
 							<Paper className={classes.paperColumn}>
 								<Typography className={classes.padding} align="center" variant={"h5"}>
 									<strong> List Id: {listId} </strong>
 								</Typography>
 								<Typography align="center">
-									<strong> Total Count: {items.filter((item) => item.listId === listId).length} </strong>
+									<strong> Total Count: {items.filter((item : IItems) => item.listId === listId).length} </strong>
 								</Typography>
 								{items.map(
 									(data: IItems) =>
 										data.listId === listId && (
 											<div key={data.id} className={classes.padding}>
 												<Card className={classes.padding}>
-													Name: {data.name}
+													Name: {data.name ? data.name : "N/A"}
 												</Card>
 											</div>
 										)

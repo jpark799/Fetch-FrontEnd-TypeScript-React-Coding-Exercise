@@ -20,8 +20,8 @@ const useStyles = makeStyles(() => ({
 	},
 	loading: {
 		padding: "30%",
-		textAlign: "center"
-	}
+		textAlign: "center",
+	},
 }));
 
 export default function App() {
@@ -51,7 +51,6 @@ export default function App() {
 		fetch(enableCrossOriginRequests + requestUrl)
 			.then((response) => response.json())
 			.then((data: IItems[]) => {
-
 				// Filtered out all nulls and empty strings
 				const filteredItems = data.filter((item: IItems) => item.name !== null && item.name.length !== 0);
 
@@ -65,7 +64,7 @@ export default function App() {
 				);
 
 				// Created an array of all the unique ListIds to populate my columns
-				const availableListIds = filteredItems.map((item : IItems) => item.listId);
+				const availableListIds = filteredItems.map((item: IItems) => item.listId);
 				const uniqueListIds = [...new Set(availableListIds.sort())];
 
 				setListIds(uniqueListIds);
@@ -86,15 +85,13 @@ export default function App() {
 									<strong> List Id: {listId} </strong>
 								</Typography>
 								<Typography align="center">
-									<strong> Total Count: {items.filter((item : IItems) => item.listId === listId).length} </strong>
+									<strong> Total Count: {items.filter((item: IItems) => item.listId === listId).length} </strong>
 								</Typography>
 								{items.map(
 									(data: IItems) =>
 										data.listId === listId && (
 											<div key={data.id} className={classes.padding}>
-												<Card className={classes.padding}>
-													Name: {data.name ? data.name : "N/A"}
-												</Card>
+												<Card className={classes.padding}>Name: {data.name ? data.name : "N/A"}</Card>
 											</div>
 										)
 								)}
@@ -103,7 +100,10 @@ export default function App() {
 					))}
 				</Grid>
 			) : (
-				<div className={classes.loading}> <CircularProgress/> </div>
+				<div className={classes.loading}>
+					{" "}
+					<CircularProgress />{" "}
+				</div>
 			)}
 		</div>
 	);

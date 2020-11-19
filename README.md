@@ -1,6 +1,6 @@
-## Fetch Front-End Coding Exercise
+## Type-Script Front-End Coding Exercise
 
-- A front-end coding challenge from Fetch.
+- A front-end coding challenge.
 
 ### Requirements
 
